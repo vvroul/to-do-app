@@ -1,5 +1,6 @@
 {
-  "name": "nuxt-app",
+  "name": "todo-app",
+  "license":"UNLICENSED",
   "private": true,
   "type": "module",
   "scripts": {
