@@ -14,26 +14,45 @@
       </button>
     </div>
     <div class="border-b-[1px] border-black"></div>
-    <TodoListContentListItems :items="items" />
+    <TodoListContentListItems
+      :items="listItems"
+      :removeCallback="removeItemFromList"
+      :updateCallback="updateItemFromList"
+    />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 
+const inputText = ref("");
+let listItems = ref([]);
+
 // Getting the items from the API
 const { data: items } = await useFetch("https://to-do-app.titlos.com/todos");
+listItems.value = toRaw(items.value);
 
-const inputText = ref("");
-
-// Adding items to the list
+// Adding a new item to the list, binded to the input's text
 const addItemToList = async () => {
-  await useFetch("https://to-do-app.titlos.com/todos", {
-    method: "post",
-    body: {
-      title: inputText,
-    },
-    mode: "no-cors",
-  });
+  if (inputText.value) {
+    await useFetch("https://to-do-app.titlos.com/todos", {
+      method: "post",
+      body: {
+        title: inputText,
+      },
+    });
+  }
+};
+
+// Update an item from the list
+const updateItemFromList = async (itemId) => {
+  if (itemId) {
+  }
+};
+
+// Removing an item from the list
+const removeItemFromList = async (itemId) => {
+  if (itemId) {
+  }
 };
 </script>
