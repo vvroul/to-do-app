@@ -9,7 +9,7 @@
       >
         <span
           class="font-[Open_Sans] text-[17px] w-[200px] tablet:w-full break-words"
-          :class="{ 'line-through': item.completed }"
+          :class="{ 'line-through font-bold italic': item.completed }"
           @click="updateCallback(item.id)"
         >
           {{ item.title }}
