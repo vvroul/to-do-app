@@ -3,5 +3,3 @@
     TO DO LIST
   </div>
 </template>
-
-<script setup></script>
