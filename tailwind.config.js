@@ -9,6 +9,9 @@ export default {
     "./error.vue",
   ],
   theme: {
+    screens: {
+      tablet: "825px",
+    },
     extend: {},
   },
   plugins: [],
