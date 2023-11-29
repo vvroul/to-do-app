@@ -28,17 +28,18 @@ import { ref } from "vue";
 const inputText = ref("");
 let listItems = ref([]);
 
-// Getting the items from the API
+// Get the items from the API
 const { data: items } = await useFetch("https://to-do-app.titlos.com/todos");
 listItems.value = toRaw(items.value);
 
-// Adding a new item to the list, binded to the input's text
+// Add a new item to the list, binded to the input's text
 const addItemToList = async () => {
   if (inputText.value) {
-    await useFetch("https://to-do-app.titlos.com/todos", {
+    await $fetch("https://to-do-app.titlos.com/todos", {
+      mode: "no-cors",
       method: "post",
       body: {
-        title: inputText,
+        title: inputText.value,
       },
     });
   }
@@ -47,12 +48,27 @@ const addItemToList = async () => {
 // Update an item from the list
 const updateItemFromList = async (itemId) => {
   if (itemId) {
+    await $fetch(`https://to-do-app.titlos.com/todos/${itemId}`, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+      method: "put",
+      body: {
+        completed: true,
+      },
+    });
   }
 };
 
-// Removing an item from the list
+// Remove an item from the list
 const removeItemFromList = async (itemId) => {
   if (itemId) {
+    await $fetch(`https://to-do-app.titlos.com/todos/${itemId}`, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+      method: "delete",
+    });
   }
 };
 </script>
